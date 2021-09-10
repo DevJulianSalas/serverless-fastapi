@@ -40,5 +40,5 @@ functions:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
-          method: post
+          method: any
           path: /{proxy+}
