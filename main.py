@@ -26,8 +26,7 @@ class Item(BaseModel):
 
 @app.post("/webhook")
 async def webhook(item: Item):
-    print(item.dataProduto)
-    print(item.url)
+    print(item)
     return item
 
 
