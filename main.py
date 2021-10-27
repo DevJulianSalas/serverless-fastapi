@@ -1,17 +1,28 @@
+import os
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from mangum import Mangum
 from datetime import datetime
 from typing import Optional
+import boto3
+import json
 
 
-import os
+# Global Variables
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('ons_webhook')
+
 
 stage = os.environ.get('STAGE', None)
 openapi_prefix = f"/{stage}" if stage else "/"
 
 
 app = FastAPI(title="serverless-app", openapi_prefix=openapi_prefix)
+
+
+def add_item(item):
+    response = table.put_item(Item=item)
+    return response
 
 
 class Item(BaseModel):
@@ -26,8 +37,8 @@ class Item(BaseModel):
 
 @app.post("/webhook")
 async def webhook(item: Item):
-    print(item.dataProduto)
-    print(item.url)
+    response = add_item(item)
+    print(response)
     return item
 
 
