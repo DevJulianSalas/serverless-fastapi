@@ -45,7 +45,8 @@ class Item(BaseModel):
 
 @app.post("/webhook")
 async def webhook(item: Item):
-    response = add_item(item)
+    print(item.dict())
+    response = add_item(item.dict())
     print(response)
     return item
 
