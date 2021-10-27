@@ -21,7 +21,15 @@ app = FastAPI(title="serverless-app", openapi_prefix=openapi_prefix)
 
 
 def add_item(item):
-    response = table.put_item(Item=item)
+    response = table.put_item(Item={
+        "dataProduto": item['dataProduto'],
+        "macroProcesso": item['macroProcesso'],
+        "nome": item['nome'],
+        "periodicidade": item['periodicidade'],
+        "periodicidadeFinal": item['periodicidadeFinal'],
+        "processo": item['processo'],
+        "url": item['url']
+    })
     return response
 
 
