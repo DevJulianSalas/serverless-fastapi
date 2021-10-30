@@ -84,6 +84,7 @@ async def webhook(item: Item):
 def satellite_precipitation_history_zip():
     key = 'Histórico de Precipitação por Satélite'
     url = get_url_nome(key)
+    print(url)
     if not url:
         return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
@@ -93,6 +94,7 @@ def satellite_precipitation_history_zip():
 def hydraulic_operation_reports():
     key = 'Informes sobre a operação Hidráulica'
     url = get_url_nome(key)
+    print(url)
     if not url:
         return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
@@ -102,6 +104,7 @@ def hydraulic_operation_reports():
 def daily_flow_forecast_zip():
     key = 'Arquivos dos modelos de previsão de vazões diárias - PDP'
     url = get_url_nome(key)
+    print(url)
     if not url:
         return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
@@ -111,6 +114,7 @@ def daily_flow_forecast_zip():
 def entry_exit_dectks_dessem_zip():
     key = 'Decks de entrada e saída - Modelo DESSEM'
     url = get_url_nome(key)
+    print(url)
     if not url:
         return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
