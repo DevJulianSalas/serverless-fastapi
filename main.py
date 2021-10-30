@@ -40,8 +40,8 @@ def add_item(item):
 def get_url_nome(key):
     response = table.get_item(Key={'nome': key})
     response = response['Item']
-    print('this is the response', response)
-    return response
+    url = response.get('url')
+    return url
 
 
 def generate_stream_response(rsp, filename):
@@ -82,27 +82,37 @@ async def webhook(item: Item):
 
 @app.get("/satellite_precipitation_history_zip")
 def satellite_precipitation_history_zip():
-    item = get_url_nome('Histórico de Precipitação por Satélite')
-    print(item)
-    url = 'https://apps08.ons.org.br/ONS.Sintegre.Proxy/webhook?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVUkwiOiJodHRwczovL3NpbnRlZ3JlLm9ucy5vcmcuYnIvc2l0ZXMvOS81MS9Qcm9kdXRvcy8yNzcvRFNfT05TXzExMjAyMV9SVjBEMzEuemlwIiwidXNlcm5hbWUiOiJyaWNhcmRvQGh1ZXp0ZWxlY29tLmNvbS5iciIsIm5vbWVQcm9kdXRvIjoiRGVja3MgZGUgZW50cmFkYSBlIHNhw61kYSAtIE1vZGVsbyBERVNTRU0iLCJJc0ZpbGUiOiJUcnVlIiwiaXNzIjoiaHR0cDovL2xvY2FsLm9ucy5vcmcuYnIiLCJhdWQiOiJodHRwOi8vbG9jYWwub25zLm9yZy5iciIsImV4cCI6MTYzNTY5OTAyMywibmJmIjoxNjM1NjEyMzgzfQ.KboEWhn8szKxht_VOXggFvcD7pWHPDXq_EjVV53ZPPs'
+    key = 'Histórico de Precipitação por Satélite'
+    url = get_url_nome(key)
+    if not url:
+        return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
 
 
 @app.get("/hydraulic_operation_reports")
 def hydraulic_operation_reports():
-    url = 'https://apps08.ons.org.br/ONS.Sintegre.Proxy/webhook?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVUkwiOiJodHRwczovL3NpbnRlZ3JlLm9ucy5vcmcuYnIvc2l0ZXMvOS81MS9Qcm9kdXRvcy8yNzcvRFNfT05TXzExMjAyMV9SVjBEMzEuemlwIiwidXNlcm5hbWUiOiJyaWNhcmRvQGh1ZXp0ZWxlY29tLmNvbS5iciIsIm5vbWVQcm9kdXRvIjoiRGVja3MgZGUgZW50cmFkYSBlIHNhw61kYSAtIE1vZGVsbyBERVNTRU0iLCJJc0ZpbGUiOiJUcnVlIiwiaXNzIjoiaHR0cDovL2xvY2FsLm9ucy5vcmcuYnIiLCJhdWQiOiJodHRwOi8vbG9jYWwub25zLm9yZy5iciIsImV4cCI6MTYzNTY5OTAyMywibmJmIjoxNjM1NjEyMzgzfQ.KboEWhn8szKxht_VOXggFvcD7pWHPDXq_EjVV53ZPPs'
+    key = 'Informes sobre a operação Hidráulica'
+    url = get_url_nome(key)
+    if not url:
+        return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
 
 
 @app.get("/daily_flow_forecast_zip")
 def daily_flow_forecast_zip():
-    url = 'https://apps08.ons.org.br/ONS.Sintegre.Proxy/webhook?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVUkwiOiJodHRwczovL3NpbnRlZ3JlLm9ucy5vcmcuYnIvc2l0ZXMvOS81MS9Qcm9kdXRvcy8yNzcvRFNfT05TXzExMjAyMV9SVjBEMzEuemlwIiwidXNlcm5hbWUiOiJyaWNhcmRvQGh1ZXp0ZWxlY29tLmNvbS5iciIsIm5vbWVQcm9kdXRvIjoiRGVja3MgZGUgZW50cmFkYSBlIHNhw61kYSAtIE1vZGVsbyBERVNTRU0iLCJJc0ZpbGUiOiJUcnVlIiwiaXNzIjoiaHR0cDovL2xvY2FsLm9ucy5vcmcuYnIiLCJhdWQiOiJodHRwOi8vbG9jYWwub25zLm9yZy5iciIsImV4cCI6MTYzNTY5OTAyMywibmJmIjoxNjM1NjEyMzgzfQ.KboEWhn8szKxht_VOXggFvcD7pWHPDXq_EjVV53ZPPs'
+    key = 'Arquivos dos modelos de previsão de vazões diárias - PDP'
+    url = get_url_nome(key)
+    if not url:
+        return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
 
 
 @app.get("/entry_exit_dectks_dessem_zip")
 def entry_exit_dectks_dessem_zip():
-    url = 'https://apps08.ons.org.br/ONS.Sintegre.Proxy/webhook?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVUkwiOiJodHRwczovL3NpbnRlZ3JlLm9ucy5vcmcuYnIvc2l0ZXMvOS81MS9Qcm9kdXRvcy8yNzcvRFNfT05TXzExMjAyMV9SVjBEMzEuemlwIiwidXNlcm5hbWUiOiJyaWNhcmRvQGh1ZXp0ZWxlY29tLmNvbS5iciIsIm5vbWVQcm9kdXRvIjoiRGVja3MgZGUgZW50cmFkYSBlIHNhw61kYSAtIE1vZGVsbyBERVNTRU0iLCJJc0ZpbGUiOiJUcnVlIiwiaXNzIjoiaHR0cDovL2xvY2FsLm9ucy5vcmcuYnIiLCJhdWQiOiJodHRwOi8vbG9jYWwub25zLm9yZy5iciIsImV4cCI6MTYzNTY5OTAyMywibmJmIjoxNjM1NjEyMzgzfQ.KboEWhn8szKxht_VOXggFvcD7pWHPDXq_EjVV53ZPPs'
+    key = 'Decks de entrada e saída - Modelo DESSEM'
+    url = get_url_nome(key)
+    if not url:
+        return {'msg': f'error, failed try to get url from {key} in dynamodb'}
     return perform_http_strem(url)
 
 
