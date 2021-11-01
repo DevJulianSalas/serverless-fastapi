@@ -36,6 +36,7 @@ functions:
     handler: main.handler
     environment:
       STAGE: ${self:provider.stage}
+      TZ: America/Bogota
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     events:

@@ -55,7 +55,7 @@ def perform_http_stream(url, filename):
         if rsp.status_code == 200:
             return generate_stream_response(rsp, filename)
         else:
-            return {'msg': f'oops could not process the request status code is : {rsp.status_code} url used {url}'}
+            return {'msg': f'oops could not process the request, the status code is : {rsp.status_code} url used {url}'}
     except requests.exceptions.HTTPError as e:
         print(e)
         return {'msg': 'oops an error has ocurred check logs'}
