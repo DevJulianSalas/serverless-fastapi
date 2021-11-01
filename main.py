@@ -34,7 +34,7 @@ def add_item(item):
 
 def get_url_nome(key):
     response = table.get_item(Key={'nome': key})
-    item = response.get('item', False)
+    item = response.get('Item', False)
     return item['url'] if item else ''
 
 
