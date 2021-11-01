@@ -26,7 +26,8 @@ def add_item(item):
         "periodicidade": item['periodicidade'],
         "periodicidadeFinal": item['periodicidadeFinal'],
         "processo": item['processo'],
-        "url": item['url']
+        "url": item['url'],
+        'created_at': datetime.now().isoformat()
     })
     return response
 
