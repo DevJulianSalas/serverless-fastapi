@@ -82,7 +82,7 @@ def satellite_precipitation_history():
     key = 'Histórico de Precipitação por Satélite'
     url = get_url_nome(key)
     if not url:
-        return {'msg': f'error, failed getting the url from {key} key in dynamodb'}
+        return {'msg': f'error, failed getting the url from {key} key'}
     return perform_http_stream(url, 'satellite_precipitation_history')
 
 
@@ -91,7 +91,7 @@ def hydraulic_operation_reports():
     key = 'Informes sobre a operação Hidráulica'
     url = get_url_nome(key)
     if not url:
-        return {'msg': f'error, failed getting the url from {key} key in dynamodb'}
+        return {'msg': f'error, failed getting the url from {key} key'}
     return perform_http_stream(url, 'hydraulic_operation_reports')
 
 
@@ -100,7 +100,7 @@ def daily_flow_forecast():
     key = 'Arquivos dos modelos de previsão de vazões diárias - PDP'
     url = get_url_nome(key)
     if not url:
-        return {'msg': f'error, failed getting the url from {key} key in dynamodb'}
+        return {'msg': f'error, failed getting the url from {key} key'}
     return perform_http_stream(url, 'daily_flow_forecast')
 
 
@@ -109,7 +109,7 @@ def entry_exit_dectks_dessem():
     key = 'Decks de entrada e saída - Modelo DESSEM'
     url = get_url_nome(key)
     if not url:
-        return {'msg': f'error, failed getting the url from {key} key in dynamodb'}
+        return {'msg': f'error, failed getting the url from {key} key'}
     return perform_http_stream(url, 'entry_exit_dectks_dessem')
 
 
